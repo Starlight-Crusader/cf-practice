@@ -1,2 +1,4 @@
 **/.vscode/
 **/main
+**/*.class
+__pycache__/
