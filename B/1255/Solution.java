@@ -57,7 +57,20 @@ public class Solution {
                     if (!vertexInMSP[v]) {
                         int dist = a[u] + a[v];
 
+                        boolean shouldUpdate = false;
+
                         if (dist < minDistFromMSPVal[v]) {
+                            shouldUpdate = true;
+                        } else if (dist == minDistFromMSPVal[v] && minDistFromMSPSrc[v] != -1) {
+                            int currentSrcDegree = adj.get(minDistFromMSPSrc[v]).size();
+                            int newSrcDegree = adj.get(u).size();
+
+                            if (newSrcDegree < currentSrcDegree) {
+                                shouldUpdate = true;
+                            }
+                        }
+
+                        if (shouldUpdate) {
                             minDistFromMSPVal[v] = dist;
                             minDistFromMSPSrc[v] = u;
                         }
